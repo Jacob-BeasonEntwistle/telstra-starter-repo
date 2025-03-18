@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class UserService {
 
-    private List<User> userList;
+    private final List<User> userList;
 
     public UserService() {
         userList = new ArrayList<>();
@@ -24,13 +24,18 @@ public class UserService {
     }
 
     public Optional<User> getUser(String iccid) {
-        Optional optional = Optional.empty();
-        for (User user : userList) {
-            if (iccid == user.getIccid()){
+        Optional<User> optional = Optional.empty();
+        for (User user: userList) {
+            if (iccid.equals(user.getIccid())){
                 optional = Optional.of(user);
                 return optional;
             }
         }
         return optional;
+    }
+
+    public User addUser(User user){
+        userList.add(user);
+        return user;
     }
 }
