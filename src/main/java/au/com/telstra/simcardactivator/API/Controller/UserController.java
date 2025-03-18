@@ -27,4 +27,15 @@ public class UserController {
     public User addUser(@RequestBody User user){
         return userService.addUser(user);
     }
+
+    @PostMapping("/activate")
+    public String activateSim(@RequestParam String iccid){
+        boolean success = userService.activateSim(iccid);
+        if (success){
+            return "success";
+        }
+        else {
+            return "fail";
+        }
+    }
 }
